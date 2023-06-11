@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -40,24 +42,41 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request){
-        if($request->isMethod('post')){
+    if($request->isMethod('post')){
 
-            $username = $request->input('username');
-            $mail = $request->input('mail');
-            $password = $request->input('password');
+        $rules = [
+           'username' => 'required|min:2|max:12',
+           'mail' => 'required|email|min:5|max:40|unique:users,mail',
+           'password' => 'required|alpha_num|min:8|max:20',
+           'password_confirmation' => 'required|alpha_num|min:8|max:20|same:password',
+        ];
 
-            User::create([
-                'username' => $username,
-                'mail' => $mail,
-                'password' => bcrypt($password),
-            ]);
+        $validator = Validator::make($request->all(), $rules);
 
-            return redirect('added');
+        if ($validator->fails()) {
+            return redirect('register')
+                ->withErrors($validator)
+                ->withInput();
         }
-        return view('auth.register');
-    }
 
-    public function added(){
-        return view('auth.added');
+        $username = $request->input('username');
+        $mail = $request->input('mail');
+        $password = $request->input('password');
+
+       User::create([
+       'username' => $username,
+       'mail' => $mail,
+       'password' => bcrypt($password),
+       ]);
+
+        return redirect('added')->with('registered_username', $username);
     }
+    return view('auth.register');
+}
+
+
+   public function added(Request $request){
+    $username = $request->session()->get('registered_username');
+    return view('auth.added', compact('username'));
+  }
 }

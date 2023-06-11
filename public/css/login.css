@@ -1,0 +1,76 @@
+/* 全体の背景グラデーション */
+body {
+  background-image: linear-gradient(to bottom, #0066FF, #FFFF33);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ログインフォームの中央揃え */
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* 半透明の白色 */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* 各要素のマージン調整 */
+label,
+input[type="text"],
+input[type="password"],
+button,
+p {
+  margin: 10px;
+}
+
+/* 白色のテキスト */
+label,
+input[type="text"],
+input[type="password"],
+button,
+p a {
+  color: #000000;
+}
+
+.welcome-text {
+  color: #ffffff;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+header {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ログインボタンのスタイル */
+input[type="submit"] {
+  background-color: #FF3366;
+  color: #ffffff;
+  align-self: flex-end;
+}
+
+.button-container {
+  text-align: right;
+  width: 100%;
+}

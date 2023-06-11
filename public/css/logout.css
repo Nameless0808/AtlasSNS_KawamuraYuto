@@ -1,10 +1,23 @@
 @charset "UTF-8";
 
-html{
+html {
     height: 100%;
 }
 
-body{
+body {
     height: 100%;
     background: #186AC9;
+}
+
+.header-content p {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+
+
+/* 削除機能の用意されていた画像の大きさが違ったので、統一するためのCSS。そのうちつかう、。 */
+.delete-post img {
+    width: 100px;
+    height: auto;
 }

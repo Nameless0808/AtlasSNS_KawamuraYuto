@@ -1,22 +1,169 @@
 @charset "utf-8";
-html{
-}
-body{
-}
+
+html {}
+
+body {}
+
 /* header */
-header{
-    background:#186AC9;
+header {
+    background: #186AC9;
+    position: relative;
+    /* 追ドロップダウンメニューの基準点 */
 }
 
+.dropdown-container {
+    position: absolute;
+    /*  ヘッダー内の位置を絶対位置 */
+    top: 100%;
+    /*  ヘッダーの下 */
+    right: 0;
+    width: 200px;
+    /*  ドロップダウンの幅を定義 */
+    z-index: 1000;
+    /*  ドロップダウンメニューが他の要素の上にくるようにします */
+}
+
+#collapseMenu {
+    position: relative;
+    /*  ドロップダウンの位置dropdown-containerに対して相対位置 */
+    width: 100%;
+    /*  ドロップダウンの幅は親要素 */
+}
+
+.dropdown-container .container {
+    width: 100%;
+    /* : コンテナの幅は親要素 */
+    margin-right: 0;
+    /* : 右マージンは不要 */
+}
+
+.dropdown-container .accordion .card .card-body {
+    padding: 0;
+    /*  ドロップダウンメニュー内の余白を削除 */
+}
+
+
+
 /* main content */
-#row{
+#row {
     display: flex;
     flex-flow: row wrap;
 }
-#container{
+
+#container {
     flex: 0 0 80%;
 }
-#side-bar{
+
+#side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #727272;
+}
+
+
+
+#head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    margin-right: 10px;
+}
+
+li {
+    list-style: none;
+    border-bottom: 1px solid #000;
+    display: flex;
+}
+
+.post-content {
+    width: 100%;
+    padding: 15px;
+}
+
+.post-content>div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-name {
+    margin-bottom: 10px;
+}
+
+.btn-primary.edit-button,
+.btn-primary.edit-button:hover,
+.btn-primary.edit-button:active,
+.btn-primary.edit-button:focus {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.btn-danger.delete-post,
+.btn-danger.delete-post:hover,
+.btn-danger.delete-post:active,
+.btn-danger.delete-post:focus {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.btn-primary[type="submit"],
+.btn-primary[type="submit"]:hover,
+.btn-primary[type="submit"]:active,
+.btn-primary[type="submit"]:focus {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.btn-primary.edit-button img,
+.btn-danger.delete-post img,
+.btn-primary[type="submit"] img {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-primary.btn-update {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+
+.btn-primary.btn-update:hover,
+.btn-primary.btn-update:active,
+.btn-primary.btn-update:focus {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    color: white;
 }
