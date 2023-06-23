@@ -53,80 +53,76 @@
             </div>
 
             @if(Auth::check())
-                <div class="current-user">
-                <img src="{{ asset('storage/' . Auth::user()->images) }}" alt="User Image" class="user-image">
-                <span>{{ Auth::user()->username }}さん</span>
-                </div>
-            @endif
-
-            <div class="dropdown-container">
-                <div class="container">
-                    <div class="accordion" id="headerAccordion">
-                        <div class="card">
-                            <div class="card-header" id="headerMenu">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseMenu">
-                                        <span class="arrow">&#x25BC;</span>
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseMenu" class="collapse" aria-labelledby="headerMenu" data-parent="#headerAccordion">
-                                <div class="card-body">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/top">HOME</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/profile">プロフィール編集</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/logout">ログアウト</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+            <div class="current-user">
+                <div class="user-info">
+                    <span>{{ Auth::user()->username }}さん</span>
+                   <div class="dropdown-wrapper">
+                        <button id="hamburger-icon" class="hamburger-icon">
+                        </button>
+                        <div id="dropdown-container" class="dropdown-container" style="display: none;">>
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                   <a class="nav-link" href="/top">HOME</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/profile">プロフィール編集</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout">ログアウト</a>
+                                 </li>
+                            </ul>
                         </div>
                     </div>
+                     @if (Auth::user()->images)
+                <img src="{{ asset('storage/' . Auth::user()->images) }}" alt="User Image" class="user-image">
+                     @else
+                <img src="{{ asset('public/images/icon1.png') }}" alt="User Image" class="user-image">
+                     @endif
                 </div>
             </div>
+            @endif
 
         </div>
     </header>
 
     <div id="row">
-        <div id="container">
-            @yield('content')
-        </div >
-        <div id="side-bar">
-            <div id="confirm">
-                <h2>{{ Auth::user()->name }}</h2>
-                <div>
-                    <p>フォロー数: {{ Auth::user()->followings->count() }}</p>
-                </div>
-                <p class="btn"><a href="/followList">フォローリスト</a></p>
-                <div>
-                    <p>フォロワー数: {{ Auth::user()->followers->count() }}</p>
-                </div>
-                <p class="btn"><a href="/followerList">フォロワーリスト</a></p>
+    <div id="container">
+        @yield('content')
+    </div >
+    <div id="side-bar">
+        <div id="confirm">
+            <p>{{ Auth::user()->username }}さんの</p>
+            <div>
+                <p>フォロー数:    {{ Auth::user()->followings->count() }}人</p>
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+            <div class="btn-right">
+                <p class="btn"><a class="sidebar-button" href="/followList">フォローリスト</a></p>
+            </div>
+            <div>
+                <p>フォロワー数:  {{ Auth::user()->followers->count() }}人</p>
+            </div>
+            <div class="btn-right">
+                <p class="btn"><a class="sidebar-button" href="/followerList">フォロワーリスト</a></p>
+            </div>
+        </div>
+        <hr />  <!-- 水平線を追加 -->
+        <div class="btn-center">
+            <p class="btn"><a class="sidebar-button" href="/search">ユーザー検索</a></p>
         </div>
     </div>
+    </div>
 
-    <script>
-    $(document).ready(function () {
-        $('#headerAccordion').on('show.bs.collapse', function () {
-            $('.arrow').removeClass('arrow-down').addClass('arrow-up');
-        });
-        $('#headerAccordion').on('hide.bs.collapse', function () {
-            $('.arrow').removeClass('arrow-up').addClass('arrow-down');
+<script>
+    $(document).ready(function(){
+        $('#hamburger-icon').click(function() {
+            $('#dropdown-container').toggle();
+            $(this).toggleClass('open');
         });
     });
-    </script>
+</script>
 
-    <script src="{{ asset('js/app.js') }}"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    @stack('scripts')
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+@stack('scripts')
 </body>
 </html>

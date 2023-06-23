@@ -4,45 +4,145 @@ html {}
 
 body {}
 
-/* header */
+/* ヘッダー */
+
+#headerMenu {
+    margin-left: 10px;
+    /* ボタンの左側に10pxの余白を設定 */
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+    margin-left: 20px;
+}
+
+.logo {
+    /* add margin to the right side */
+    margin-right: 20px;
+}
+
+.dropdown-wrapper {
+    /* add margin to the left and right sides */
+    margin: 0 20px;
+}
+
+.user-image {
+    /* add margin to the left side */
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 header {
     background: #186AC9;
     position: relative;
+    height: 100px;
     /* 追ドロップダウンメニューの基準点 */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    /* ヘッダーの高さを全て使う */
+}
+
+.current-user {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    position: relative;
+
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-image {
+    height: 50px;
+    /* アイコンの高さを50pxに設定 */
+    width: 50px;
+    /* アイコンの幅を50pxに設定 */
+    border-radius: 50%;
+    /* アイコンを円形にする */
+    object-fit: cover;
+    /* 画像が設定した枠に合うように調整 */
+    margin-left: 10px;
+    /* アイコンとユーザー名の間に10pxの余白を設定 */
+}
+
+.hamburger-icon {
+    font-size: 24px;
+    /* adjust size as needed */
+    cursor: pointer;
+    transition: .5s ease-in-out;
+    background: none;
+    color: white;
+    border: none;
+}
+
+.hamburger-icon:before {
+    content: 'V';
+
+}
+
+.hamburger-icon.open:before {
+    content: 'Λ';
+
+}
+
+#headerMenu {
+    width: 100%;
+
+}
+
+.dropdown-wrapper {
+    position: relative;
+    width: 100%;
+
 }
 
 .dropdown-container {
     position: absolute;
-    /*  ヘッダー内の位置を絶対位置 */
-    top: 100%;
-    /*  ヘッダーの下 */
+    top: 200%;
     right: 0;
-    width: 200px;
-    /*  ドロップダウンの幅を定義 */
+    width: auto;
+    height: auto;
+    display: none;
+    background: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    /*  ドロップダウンメニューが他の要素の上にくるようにします */
+    min-width: 200px;
 }
 
-#collapseMenu {
-    position: relative;
-    /*  ドロップダウンの位置dropdown-containerに対して相対位置 */
+@media screen and (max-width: 600px) {
+    .dropdown-container {
+        width: 100%;
+        /* On screens smaller than 600px, the menu will take the full width. */
+    }
+}
+
+
+.dropdown-container ul li a {
+    text-align: center;
+    display: block;
     width: 100%;
-    /*  ドロップダウンの幅は親要素 */
+    padding: 10px 0;
+    color: black;
+    /* 元の文字色を黒に設定 */
 }
 
-.dropdown-container .container {
-    width: 100%;
-    /* : コンテナの幅は親要素 */
-    margin-right: 0;
-    /* : 右マージンは不要 */
+.dropdown-container ul li a:hover {
+    color: white;
+    /* ホバー時の文字色を白に設定 */
+    background-color: blue;
+    /* ホバー時の背景色を青に設定 */
 }
-
-.dropdown-container .accordion .card .card-body {
-    padding: 0;
-    /*  ドロップダウンメニュー内の余白を削除 */
-}
-
-
 
 /* main content */
 #row {
@@ -55,11 +155,44 @@ header {
 }
 
 #side-bar {
-    flex: 0 0 19%;
+    flex: 0 0 20%;
     border-left: 1px solid #727272;
+    z-index: 10;
+    padding-top: 5px;
+    overflow: auto;
+
 }
 
+#confirm .user-greeting {
+    margin-top: 20px;
 
+}
+
+#confirm {
+    margin-bottom: 10px;
+}
+
+.sidebar-button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    border-radius: 5px;
+    /* 角丸に設定 */
+}
+
+.sidebar-button:hover {
+    color: white;
+}
+
+.btn-right {
+    text-align: right;
+}
+
+.btn-center {
+    text-align: center;
+}
 
 #head {
     display: flex;
@@ -67,8 +200,6 @@ header {
     align-items: center;
     position: relative;
 }
-
-
 
 .header-container {
     display: flex;
@@ -82,16 +213,21 @@ header {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-
 }
 
 .user-info {
     display: flex;
     align-items: center;
+
+}
+
+.user-info span {
+    white-space: nowrap;
+    /* 行の折り返しを防ぐ */
 }
 
 .user-avatar {
-    margin-right: 10px;
+    margin-right: 30%;
 }
 
 li {
@@ -112,6 +248,419 @@ li {
 
 .post-name {
     margin-bottom: 10px;
+}
+
+
+
+
+
+textarea.bio-textarea {
+    border: 1px solid #ccc !important;
+    /* 任意のボーダースタイルを設定 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    /* 任意のボックスシャドウを設定 */
+}
+
+
+/* 投稿フォームの全体 */
+
+textarea.form-control {
+    height: auto;
+    border: none;
+    box-shadow: none;
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative;
+}
+
+
+
+/* 投稿フォーム内のユーザー画像 */
+.post-form .user-image {
+    align-self: flex-start;
+}
+
+/* 投稿フォーム内のテキストエリア */
+.post-form .form-group {
+    flex-grow: 1;
+}
+
+/* 送信ボタン */
+.post-form button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+}
+
+/*区切り */
+.post-block {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+}
+
+/* User image inside post block */
+.post-block .user-image {
+    margin-right: 1rem;
+}
+
+/* Post content */
+.post-content {
+    flex-grow: 1;
+}
+
+/* Post header */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+/* Post body */
+.post-body {
+    margin-bottom: 1rem;
+}
+
+/* 投稿ボタン */
+.post-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 検索ページ */
+.search-input button {
+    background: none;
+    /* ボタンの背景色を透明にする */
+    border: none;
+    /* ボタンの枠線を消す */
+    padding: 0;
+    /* ボタンの内側の余白を消す */
+    height: 10px;
+    /* ボタンの高さを20pxにする */
+    width: 10px;
+    /* ボタンの幅を20pxにする */
+    border-radius: 5px;
+    /* 角丸に設定 */
+}
+
+.search-input button img {
+    height: 40px;
+    /* 画像の高さを40pxにする */
+    width: 40px;
+    /* 画像の幅を40pxにする */
+}
+
+#search-results {
+    border-top: 1px solid #ddd;
+    /* 上側に区切り線を追加 */
+    padding-top: 1rem;
+    /* 区切り線上部への余白を設定 */
+    margin-top: 1rem;
+    /* 区切り線上部への余白を設定 */
+    margin-left: 200px;
+}
+
+.search-input {
+    padding: 1rem;
+    /* 全方向の余白を設定 */
+}
+
+.user-info-v2 {
+    display: flex;
+    align-items: center;
+}
+
+.user-info-v2 img {
+    margin-left: 200px;
+}
+
+
+/* 検索結果のページに関連する部分 */
+
+#search-results {
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    margin-left: 200px;
+    /* これが左側に大きな余白を作っている可能性がある。適切な値に調整するか削除を検討 */
+}
+
+.search-results {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* これで要素間に均等な余白ができる */
+    margin: 0 20px;
+    /* 両側に20pxの余白を設定（必要に応じて値を調整） */
+}
+
+.user-info-v2 {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    /* これで要素間に右側の余白ができる。適切な値に調整してください。 */
+}
+
+.user-info-v2 img {
+    margin-left: 10px;
+    margin-bottom: 10px
+        /* 画像の左側に10pxの余白を設定 */
+}
+
+
+.search-results-page .user {
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: center;
+}
+
+.search-results-page .user-info-v2 {
+    display: flex;
+    align-items: center;
+}
+
+.search-results-page .user-info-v2 img {
+    margin-left: 5px !important;
+
+}
+
+
+
+
+
+/* フォローリスト、フォロワー、プロフィール */
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-word {
+    margin-left: 40px;
+}
+
+.follow-button {
+    background-color: #00BFFF;
+    /* 背景色を青に設定 */
+    color: #ffffff;
+    /* 文字色を白に設定 */
+    border: none;
+    /* ボーダーを非表示にする */
+    padding: 10px;
+    /* パディングを設定 */
+    cursor: pointer;
+    /* カーソルをポインタに設定 */
+    border-radius: 5px;
+    /* 角丸に設定 */
+}
+
+.unfollow-button {
+    background-color: #FF3366;
+    /* 背景色を赤に設定 */
+    color: #ffffff;
+    /* 文字色を白に設定 */
+    border: none;
+    /* ボーダーを非表示にする */
+    padding: 10px;
+    /* パディングを設定 */
+    cursor: pointer;
+    /* カーソルをポインタに設定 */
+    border-radius: 5px;
+    /* 角丸に設定 */
+}
+
+.centered-button {
+    margin: 0 auto;
+    /* ボタンを中央に配置 */
+    display: block;
+    /* ボタンをブロック要素として表示 */
+
+}
+
+.button-container {
+    text-align: center;
+    margin-right: 40%;
+}
+
+/* コンテナ内の要素を中央揃え */
+
+.left-align-button {
+    display: inline-block;
+    /* ボタンをインラインブロックとして表示 */
+    text-align: left;
+    /* テキストを左揃え */
+}
+
+.follow-button:hover,
+.unfollow-button:hover {
+    opacity: 0.8;
+    /* ホバー時の透明度を設定 */
+}
+
+
+
+.full-width-container {
+    width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.title-and-icons {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    margin-left: 0%;
+}
+
+.title-and-icons h1 {
+    margin-right: 20%;
+}
+
+hr.style-one,
+hr {
+    width: 80%;
+    border: 0;
+    margin: 0;
+}
+
+hr.style-one {
+    border-top: 5px solid #808080;
+}
+
+hr {
+    border-top: 1px solid #ddd;
+}
+
+.following-post,
+.follower-post {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    /* 上下に10pxのpaddingを追加 */
+}
+
+.following-image,
+.follower-image {
+    width: 64px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.following-content,
+.follower-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0 10px;
+    /* 左右に10pxのpaddingを追加 */
+}
+
+.following-username,
+.follower-username {
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.following-post-time,
+.follower-post-time {
+    text-align: right;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: 1rem;
+    /* 新しいマージンを追加して領域内に収める */
+}
+
+.post-info,
+.follower-post-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    /* user-info の下に余白を設定 */
+}
+
+.following-post-text,
+.follower-post-text {
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+.card-title,
+.card-text {
+    margin: 0;
+}
+
+.user-profile {
+    padding: 20px;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-avatar img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.user-details {
+    display: flex;
+    align-items: flex-start;
+}
+
+.user-header-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.user-labels {
+    margin-right: 20px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+
+.form-control {
+    flex-grow: 1;
+    text-align: left;
+}
+
+label {
+    white-space: nowrap;
+    margin-right: 150px;
+    text-align: right !important;
 }
 
 .btn-primary.edit-button,
@@ -147,6 +696,7 @@ li {
     height: 50px;
 }
 
+
 .btn-primary.edit-button img,
 .btn-danger.delete-post img,
 .btn-primary[type="submit"] img {
@@ -155,15 +705,52 @@ li {
 }
 
 .btn-primary.btn-update {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: #FF3366;
+    border-color: #FF3366;
     color: white;
+    margin-left: 25%;
+    width: 50%;
 }
 
 .btn-primary.btn-update:hover,
 .btn-primary.btn-update:active,
 .btn-primary.btn-update:focus {
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
+    background-color: #FF3366;
+    border-color: #FF3366;
     color: white;
+    margin-left: 25%;
+    width: 50%
+}
+
+.user-header,
+.other-user-header {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 100px;
+    /* 100pxのままでも良いか、必要に応じて調整 */
+    height: 100px;
+    /* 450pxから100pxに変更するなど */
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.other-user-header .user-details {
+    display: flex;
+    flex-direction: row;
+    /* 横に配置 */
+    align-items: center;
+    /* これをcenterに設定 */
+    margin-left: 20px;
+    /* アイコンの右側に余白を設定 */
+}
+
+
+.other-user-header .user-labels,
+.other-user-header .user-info {
+    display: flex;
+    flex-direction: column;
+    /* 縦に配置 */
 }

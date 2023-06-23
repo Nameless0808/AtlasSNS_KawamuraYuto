@@ -1,45 +1,51 @@
 @extends('layouts.login')
 
 @section('content')
-<style>
-.follower-image {
-    width: 64px;  /* アイコンの幅を64pxに設定 */
-    height: 64px; /* アイコンの高さを64pxに設定 */
-    margin-right: 5px; /* 右マージンを5に設定 */
-}
-</style>
+
 <div class="container">
-    <h1>Follower List</h1>
-    <hr> <!-- Horizontal line -->
-    <div class="row">
-        @foreach($followers as $follower)
-            <div class="col-md-4">
-                <!-- Follower Image -->
-                <a href="/user/{{ $follower->id }}">
-                    <img class="bd-placeholder-img card-img-top follower-image" src="{{ asset('storage/' . $follower->images) }}">
+    <div class="title-and-icons">
+        <h1>Follower List</h1>
+        <div class="follower-icons">
+            @foreach($followers as $follower)
+                <a href="{{ route('users.show', ['user' => $follower->id]) }}">
+                    @if ($follower->images)
+                        <img class="follower-image" src="{{ asset('storage/' . $follower->images) }}">
+                    @else
+                        <img class="follower-image" src="{{ asset('public/images/icon1.png') }}">
+                    @endif
                 </a>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-    <hr> <!-- Horizontal line -->
-    <!-- Posts of followers -->
-    <div class="row">
+    <hr class="style-one"> <!-- 区切り -->
+    <!-- フォロワーの投稿 -->
+    <div class="full-width-container">
         @foreach($followers as $follower)
-            @if($follower->latest_post)
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <a href="/user/{{ $follower->id }}">
-                            <img class="bd-placeholder-img card-img-top follower-image" src="{{ asset('storage/' . $follower->images) }}">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $follower->username }}</h5>
-                            <p class="card-text">{{ $follower->latest_post->post }}</p>
-                            <p class="card-text">{{ $follower->latest_post->created_at }}</p>
-                        </div>
+            <div class="follower-post">
+                <a href="/user/{{ $follower->id }}">
+                    @if ($follower->images)
+                        <img class="follower-image" src="{{ asset('storage/' . $follower->images) }}">
+                    @else
+                        <img class="follower-image" src="{{ asset('public/images/icon1.png') }}">
+                    @endif
+                </a>
+                <div class="follower-content">
+                    <div class="user-info">
+                        <p class="follower-username">{{ $follower->username }}</p>
+                        @if($follower->latest_post)
+                            <p class="follower-post-time">{{ $follower->latest_post->created_at }}</p>
+                        @endif
                     </div>
+                    @if($follower->latest_post)
+                        <p class="follower-post-text">{{ $follower->latest_post->post }}</p>
+                    @else
+                        <p class="follower-post-text">まだ、投稿がありません</p>
+                    @endif
                 </div>
-            @endif
+            </div>
+            <hr>
         @endforeach
     </div>
 </div>
+
 @endsection

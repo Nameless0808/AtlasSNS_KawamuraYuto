@@ -13,8 +13,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.5);
-  /* 半透明の白色 */
+  background-color: rgba(128, 128, 128, 0.2);
+  /* 半透明のグレー色 */
   padding: 20px;
   border-radius: 10px;
 }
@@ -30,11 +30,9 @@ p {
 
 /* 白色のテキスト */
 label,
-input[type="text"],
-input[type="password"],
 button,
 p a {
-  color: #000000;
+  color: #ffffff;
 }
 
 .welcome-text {
@@ -67,10 +65,51 @@ header {
 input[type="submit"] {
   background-color: #FF3366;
   color: #ffffff;
+  border: none;
+  /* ボタンの黒い枠線を削除 */
   align-self: flex-end;
+  border-radius: 5px;
+  /* 角丸に設定 */
 }
 
 .button-container {
   text-align: right;
   width: 100%;
+}
+
+/* 中央揃え、色白、太めのテキスト */
+#clear>p:nth-child(-n+2) {
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 中央揃え、色白のテキスト */
+#clear>p:nth-child(n+3) {
+  color: #ffffff;
+  text-align: center;
+  margin-top: 20px;
+  /* これで間隔を空けます */
+}
+
+/* ボタンのスタイル調整 */
+#clear .btn {
+  text-align: center;
+  /* ボタンの中央揃え */
+}
+
+/* ログインボタンと同じスタイルのリンク */
+#clear .btn a {
+  display: inline-block;
+  /* これで背景色がテキストの周囲だけでなくボタン全体に適用されます */
+  background-color: #FF3366;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 20px;
+  /* ボタンとテキストとの間隔を空けます */
+
+  /* 角丸に設定 */
 }

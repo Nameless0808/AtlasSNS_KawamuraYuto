@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UsersController extends Controller
 {
@@ -25,27 +26,32 @@ class UsersController extends Controller
 
     public function searchResult(Request $request)
     {
-        $query = $request->input('query');
-        $users = User::query();
+    $query = $request->input('query');
+    $users = User::query();
 
-        if($query) {
-            $users = $users->where('username', 'LIKE', "%{$query}%");
+    if($query) {
+        $users = $users->where('username', 'LIKE', "%{$query}%");
+    }
+
+    $users = $users->where('id', '!=', Auth::id())->get();
+    $currentUser = Auth::user();
+
+    // ユーザーデータを正しくフィールドと対応付ける
+    $users = $users->map(function($user) use ($currentUser) {
+        if (Str::startsWith($user->images, 'https://') || Str::startsWith($user->images, 'http://')) {
+            $imageUrl = $user->images;
+        } else {
+            $imageUrl = asset('storage/' . $user->images);
         }
+        return [
+            'id' => $user->id,
+            'name' => $user->username,
+            'avatar' => $user->images ? $imageUrl : '/images/icon1.png',
+            'isFollowing' => $currentUser->isFollowing($user->id),
+        ];
+    });
 
-        $users = $users->where('id', '!=', Auth::id())->get();
-        $currentUser = Auth::user();
-
-        // ユーザーデータを正しくフィールドと対応付ける
-        $users = $users->map(function($user) use ($currentUser) {
-            return [
-                'id' => $user->id,
-                'name' => $user->username,
-                'avatar' => $user->images ? "/images/{$user->images}" : '/path/to/default/avatar.png',
-                'isFollowing' => $currentUser->isFollowing($user->id),
-            ];
-        });
-
-        return response()->json($users);
+    return response()->json($users);
     }
 
     public function profile(){

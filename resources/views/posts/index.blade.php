@@ -2,28 +2,32 @@
 
 @section('content')
 
-    <div class="post-form">
-       <div class="user-image">
-    <!-- ログインユーザーの画像を表示 -->
-        <img src="{{ asset('storage/' . Auth::user()->images) }}" alt="User Image" class="user-image">
-        </div>
-
+<div class="post-form">
     <form action="/posts" method="post">
-    @csrf
-      <div class="form-group">
-      <textarea class="form-control @error('post') is-invalid @enderror" name="post" rows="3" placeholder="投稿内容を入力してください。"></textarea>
-    @error('post')
-      <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-      </span>
-      @enderror
-      </div>
-          <button type="submit" class="btn btn-primary">
-          <!-- 画像をボタンにする -->
-          <img src="/images/post.png" alt="Submit">
-          </button>
+        @csrf
+        <div class="user-image">
+            <!-- ログインユーザーの画像を表示 -->
+            @if (Auth::user()->images)
+                <img src="{{ asset('storage/' . Auth::user()->images) }}" alt="User Image" class="user-image">
+            @else
+                <img src="{{ asset('public/images/icon1.png') }}" alt="User Image" class="user-image">
+            @endif
+        </div>
+        <div class="form-group">
+            <textarea class="form-control @error('post') is-invalid @enderror" name="post" rows="3" placeholder="投稿内容を入力してください。"></textarea>
+            @error('post')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <!-- 画像をボタンにする -->
+            <img src="/images/post.png" alt="Submit">
+        </button>
     </form>
-      </div>
+    </div>
+
 
 <!-- 投稿一覧画面 -->
     @foreach ($posts as $post)
